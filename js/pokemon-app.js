@@ -16,6 +16,7 @@ let landmarkCount = 0
 
 let gameState = {
 	points: 0,
+	distance: 0,
 	captured: [],
 	messages: []
 }
@@ -87,6 +88,9 @@ let map = new InteractiveMap({
 
 			// Add points to my gamestate
 			gameState.points += landmark.points
+			gameState.distance += landmark.distanceToPlayer
+
+			
 
 			
 
@@ -94,8 +98,16 @@ let map = new InteractiveMap({
 			if (!gameState.captured.includes(landmark.name)) {
 				gameState.captured.push(landmark.name)
 				// Add a message
-				gameState.messages.push(`You captured ${landmark.name} for ${landmark.points} points`)
+				gameState.messages.push(`You captured ${landmark.name} for ${landmark.points} points, You spent ${landmark.distanceToPlayer} meters to get to ${landmark.name}`)
 			}
+
+			if (gameState.points >= 100) {
+				gameState.messages = `You win!`
+			} 
+			if (gameState.distance >= 500) {
+				gameState.messages = `You lost!`
+			}
+			
 
 		}
 	},
@@ -150,7 +162,7 @@ window.onload = (event) => {
 			<div id="main-columns">
 
 				<div class="main-column" style="flex:1;overflow:scroll;max-height:200px">
-					(TODO, add your own gamestate)
+					
 					{{gameState}}
 					
 				</div>
