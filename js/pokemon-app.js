@@ -104,7 +104,7 @@ let map = new InteractiveMap({
 			if (gameState.points >= 100) {
 				gameState.messages = `You win!`
 			} 
-			if (gameState.distance >= 500) {
+			if (gameState.distance >= 800) {
 				gameState.messages = `You lost!`
 			}
 			
